@@ -1,0 +1,30 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('slider/', views.slider_page, name='slider'),
+    path('slider/add/', views.add_slider, name='add_slider'),
+    path('slider/edit/<int:pk>/', views.edit_slider, name='edit_slider'),
+    path('slider/delete/<int:pk>/', views.delete_slider, name='delete_slider'),
+    path('testimonials/', views.testimonials_page, name='testimonials'),
+    path('testimonials/add/', views.add_testimonial, name='add_testimonial'),
+    path('testimonials/edit/<int:pk>/', views.edit_testimonial, name='edit_testimonial'),
+    path('testimonials/delete/<int:pk>/', views.delete_testimonial, name='delete_testimonial'),
+    path('insights/', views.insights_page, name='insights'),
+    path('insights/add/', views.add_insight, name='add_insight'),
+    path('insights/edit/<int:pk>/', views.edit_insight, name='edit_insight'),
+    path('insights/delete/<int:pk>/', views.delete_insight, name='delete_insight'),
+    path('infoblocks/', views.infoblocks_page, name='infoblocks'),
+    path('infoblocks/add/', views.add_infoblock, name='add_infoblock'),
+    path('infoblocks/edit/<int:pk>/', views.edit_infoblock, name='edit_infoblock'),
+    path('infoblocks/delete/<int:pk>/', views.delete_infoblock, name='delete_infoblock'),
+    path('logos/', views.logos_page, name='logos'),
+    path('logos/add/', views.add_logos, name='add_logos'),
+    path('logos/edit/<int:pk>/', views.edit_logos, name='edit_logos'),
+    path('logos/delete/<int:pk>/', views.delete_logos, name='delete_logos'),
+    path('', views.dashboard_home, name='dashboard_home'),
+    path('partners/', views.partners_page, name='partners'),
+    path('partners/add/', views.add_partner, name='add_partner'),
+    path('partners/edit/<int:pk>/', views.edit_partner, name='edit_partner'),
+    path('partners/delete/<int:pk>/', views.delete_partner, name='delete_partner'),
+]
