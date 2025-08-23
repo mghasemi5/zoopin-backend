@@ -1,6 +1,6 @@
 from django import forms
 from api.models import Partner
-from api.models import InfoBlock,logos,insights,testimonials,slider
+from api.models import InfoBlock,logos,insights,testimonials,slider,AboutPage,Service
 
 class InfoBlockForm(forms.ModelForm):
     class Meta:
@@ -31,4 +31,14 @@ class testimonialForm(forms.ModelForm):
 class sliderForm(forms.ModelForm):
     class Meta:
         model = slider
+        fields = '__all__'
+
+class AboutForm(forms.ModelForm):
+    class Meta:
+        model = AboutPage
+        fields = '__all__'
+
+class ServiceForm(forms.ModelForm):
+    class Meta:
+        model = Service
         fields = '__all__'

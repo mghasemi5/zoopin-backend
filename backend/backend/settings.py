@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#j220@-9+pv_iee^%v76l!j9^=o^0ud0#8xja1frqfqptsy@7a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["zoopin.mohammadghasemi.net"]
+ALLOWED_HOSTS = ["zoopin.mohammadghasemi.net","127.0.0.1"]
 
 
 # Application definition

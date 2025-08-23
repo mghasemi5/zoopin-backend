@@ -2,8 +2,63 @@ from django.shortcuts import render, redirect
 from api.models import Partner
 from django.contrib.admin.views.decorators import staff_member_required
 from .forms import PartnerForm
-from api.models import InfoBlock,logos, insights,testimonials,slider
-from .forms import InfoBlockForm,logoForm,insightForm,testimonialForm,sliderForm
+from api.models import InfoBlock,logos, insights,testimonials,slider,AboutPage,Service
+from .forms import InfoBlockForm,logoForm,insightForm,testimonialForm,sliderForm,AboutForm,ServiceForm
+
+
+@staff_member_required
+def services_page(request):
+    blocks = Service.objects.all()
+    return render(request, 'dashboard/services.html', {'blocks': blocks})
+
+@staff_member_required
+def add_service(request):
+    if request.method == 'POST':
+        form = ServiceForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('services')
+    else:
+        form = ServiceForm()
+    return render(request, 'dashboard/add_service.html', {'form': form})
+
+@staff_member_required
+def edit_service(request, pk):
+    block = get_object_or_404(Service, pk=pk)
+    if request.method == 'POST':
+        form = ServiceForm(request.POST, request.FILES, instance=block)
+        if form.is_valid():
+            form.save()
+            return redirect('services')
+    else:
+        form = ServiceForm(instance=block)
+    return render(request, 'dashboard/edit_service.html', {'form': form, 'block': block})
+
+@staff_member_required
+def delete_service(request, pk):
+    block = get_object_or_404(Service, pk=pk)
+    if request.method == 'POST':
+        block.delete()
+        return redirect('services')
+    return render(request, 'dashboard/delete_service.html', {'block': block})
+
+
+@staff_member_required
+def About_page(request):
+    blocks = AboutPage.objects.all()
+    return render(request, 'dashboard/about.html', {'blocks': blocks})
+
+@staff_member_required
+def edit_about(request, pk):
+    block = get_object_or_404(AboutPage, pk=pk)
+    if request.method == 'POST':
+        form = AboutForm(request.POST, request.FILES, instance=block)
+        if form.is_valid():
+            form.save()
+            return redirect('slider')
+    else:
+        form = AboutForm(instance=block)
+    return render(request, 'dashboard/edit_about.html', {'form': form, 'block': block})
 
 
 @staff_member_required

@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from .models import Partner
-from .models import InfoBlock,logos,insights,testimonials,slider
+from .models import Partner, Service
+from .models import InfoBlock,logos,insights,testimonials,slider,AboutPage
 
 class InfoBlockSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,4 +30,17 @@ class sliderSerializer(serializers.ModelSerializer):
     class Meta:
         model = slider
         fields = '__all__'
+class AboutPageSerializer(serializers.ModelSerializer):
+    hero_image = serializers.SerializerMethodField()
 
+    def get_hero_image(self, obj):
+        return obj.hero_image.url if obj.hero_image else ""
+
+    class Meta:
+        model = AboutPage
+        fields = ["title","tagline","body","body_is_html","hero_image","highlights","contact","seo","updated_at"]
+
+class ServiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Service
+        fields = ["id", "title", "slug", "description", "image"]

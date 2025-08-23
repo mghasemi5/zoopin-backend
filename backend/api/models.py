@@ -65,3 +65,33 @@ class slider(models.Model):
 
     def __str__(self):
         return self.caption
+# models.py
+from django.db import models
+from django.contrib.postgres.fields import ArrayField, JSONField  # or use a plain JSONField on Django 3.1+
+
+class AboutPage(models.Model):
+    title = models.CharField(max_length=200, blank=True)
+    tagline = models.CharField(max_length=300, blank=True)
+    body = models.TextField(blank=True)           # store sanitized HTML (recommended) or plain text
+    body_is_html = models.BooleanField(default=True)
+    hero_image = models.ImageField(upload_to="about/", blank=True)
+    highlights = models.JSONField(default=list, blank=True)  # list of {icon,title,text}
+    contact = models.JSONField(default=dict, blank=True)     # {email, phone, ...}
+    seo = models.JSONField(default=dict, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Service(models.Model):
+    title = models.CharField(max_length=180)
+    slug = models.SlugField(unique=True)
+    description = models.TextField(blank=True)
+    image = models.ImageField(upload_to="services/", blank=True, null=True)
+
+    # Optional niceties (safe to remove if you want absolute minimum)
+    order = models.IntegerField(default=0, db_index=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["order", "title"]
+
+    def __str__(self):
+        return self.title
