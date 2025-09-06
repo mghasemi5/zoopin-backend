@@ -1,134 +1,91 @@
 <!DOCTYPE html>
-<html>
+{% load static %}
+<html lang="en">
 <head>
-  <title>Admin Panel</title>
-<style>
-  /* ────────────── Testimonials Section ────────────── */
-.testimonials-section {
-  position: relative;
-  background: linear-gradient(135deg, #1c2a49 0%, #24375c 100%);
-  padding: 100px 20px;
-  color: #e5e4e2;
-  text-align: center;
-  overflow: hidden;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Cardo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f4f4f4;
+      color: #1c2a49;
+    }
 
-.testimonials-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url('../assets/images/testimonials/bg-sky.jpg') no-repeat center/cover;
-  opacity: 0.08;
-}
+    /* ────────────── Hero Section ────────────── */
+    .hero {
+      background: #1c2a49;
+      color: #e5e4e2;
+      padding: 60px 20px;
+      text-align: center;
+    }
 
-/* ────────────── Swiper Container ────────────── */
-.testimonials-swiper {
-  max-width: 950px;
-  margin: 0 auto;
-  padding: 40px;
-  border-radius: 20px;
-  background: rgba(28, 42, 73, 0.65);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(8px);
-}
+    .hero img {
+      max-width: 120px;
+      margin-bottom: 15px;
+    }
 
-/* ────────────── Individual Slide ────────────── */
-.testimonial-slide {
-  text-align: left;
-  max-width: 780px;
-  margin: 0 auto;
-  transition: transform 0.3s ease;
-}
+    .hero h1 {
+      font-family: 'Cardo', serif;
+      font-size: 2rem;
+      margin: 0;
+      letter-spacing: 1px;
+    }
 
-.testimonial-slide:hover {
-  transform: translateY(-6px);
-}
+    /* ────────────── Menu Grid ────────────── */
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
 
-/* ────────────── Quote Text ────────────── */
-.quote {
-  font-size: 1.5rem;
-  line-height: 1.6;
-  margin-bottom: 1.8rem;
-  color: #e5e4e2;
-  font-family: 'Cardo', serif;
-  position: relative;
-}
+    .menu a.button {
+      display: block;
+      text-align: center;
+      padding: 14px 20px;
+      background: #1c2a49;
+      color: #e5e4e2;
+      text-decoration: none;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
 
-.quote::before {
-  content: "“";
-  font-size: 3.5rem;
-  color: #e5e4e2;
-  opacity: 0.25;
-  position: absolute;
-  left: -15px;
-  top: -10px;
-}
+    .menu a.button:hover {
+      background: #24375c;
+      transform: translateY(-2px);
+    }
 
-/* ────────────── Author Info ────────────── */
-.author {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-}
-
-.avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  border: 3px solid #e5e4e2;
-  object-fit: cover;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
-}
-
-.author-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.name {
-  font-weight: 600;
-  font-size: 1.15rem;
-  color: #e5e4e2;
-  letter-spacing: 0.5px;
-}
-
-.title,
-.company {
-  font-size: 0.95rem;
-  color: rgba(229, 228, 226, 0.75);
-}
-
-/* ────────────── Swiper Controls ────────────── */
-.swiper-button-next,
-.swiper-button-prev {
-  color: #e5e4e2 !important;
-  background: rgba(28, 42, 73, 0.85);
-  border-radius: 50%;
-  padding: 12px;
-  transition: all 0.3s ease;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  background: #e5e4e2;
-  color: #1c2a49 !important;
-}
-
-</style>
-
+    .menu a.button:active {
+      transform: translateY(0);
+    }
+  </style>
 </head>
 <body>
-  <h1>Zoopin Admin Panel</h1>
 
-  <center><a href="{% url 'slider' %}" class="button">Slider manager</a></center>
-  <center><a href="{% url 'infoblocks' %}" class="button">Infoblocks manager</a></center>
-  <center><a href="{% url 'logos' %}" class="button">logos manager</a></center>
-  <center><a href="{% url 'partners' %}" class="button">Partners manager</a></center>
-  <center><a href="{% url 'testimonials' %}" class="button">Testimonials manager</a></center>
-  <center><a href="{% url 'insights' %}" class="button">Insights manager</a></center>
-  <center><a href="{% url 'about' %}" class="button">About manager</a></center>
-  <center><a href="{% url 'services' %}" class="button">Services manager</a></center>
+  <!-- ────────────── Hero Section ────────────── -->
+  <div class="hero">
+    <img src="{% static 'images/logo.png' %}" alt="Zoopin Logo">
+    <h1>Manager Dashboard</h1>
+  </div>
 
+  <!-- ────────────── Manager Menu ────────────── -->
+  <div class="menu">
+    <a href="{% url 'slider' %}" class="button">Slider Manager</a>
+    <a href="{% url 'infoblocks' %}" class="button">Infoblocks Manager</a>
+    <a href="{% url 'logos' %}" class="button">Logos Manager</a>
+    <a href="{% url 'partners' %}" class="button">Partners Manager</a>
+    <a href="{% url 'testimonials' %}" class="button">Testimonials Manager</a>
+    <a href="{% url 'insights' %}" class="button">Insights Manager</a>
+    <a href="{% url 'about' %}" class="button">About Manager</a>
+    <a href="{% url 'services' %}" class="button">Services Manager</a>
+  </div>
 
 </body>
 </html>
